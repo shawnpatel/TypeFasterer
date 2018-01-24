@@ -52,14 +52,23 @@ public class TypeFasterer {
         String input = keyIn.nextLine();
         String [] after = input.split(" ");
         int acc = 0;
-        for(int i = 0; i < after.length; i++)
+        int shorter = 0;
+        if(after.length < before.length)
+        {
+            shorter = after.length;
+        }
+        else{
+            shorter = before.length;
+        }
+        for(int i = 0; i < shorter; i++)
         {
             if(before[i].compareTo(after[i]) == 0)
             {
                 acc++;
             }
         }
-        System.out.println("Your accuracy is " + ((acc/before.length) * 100) + "%");
+        System.out.println("Your accuracy is " + ((100*acc)/before.length) + "%");
+        
     }
 
     private static void words() {
