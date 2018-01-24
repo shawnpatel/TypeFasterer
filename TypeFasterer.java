@@ -59,7 +59,7 @@ public class TypeFasterer {
         String menuOption = keyIn.nextLine().toLowerCase();
         if (menuOption.indexOf("1") >= 0 || menuOption.indexOf("paragraph") >= 0) {
             System.out.println("You chose paragraph! Are you ready? (The timer will begin once you say yes.)");
-
+            System.out.println("BTW, please go to full screen!!\n");
             String ready = keyIn.nextLine();
             while (ready.compareTo("yes") != 0) {
                 System.out.println("Are you ready now?");
@@ -80,14 +80,18 @@ public class TypeFasterer {
         }
     }
 
+    private static String [] paragraphs = {"If the Easter Bunny and the Tooth Fairy had babies would they take your teeth and leave chocolate for you? He told us a very exciting adventure story. I am happy to take your donation; any amount will be\ngreatly appreciated."};
     private static void paragraph() {
+        int acc = 0;
+        double wpm = 0;
+        int randP = (int)(Math.random()*paragraphs.length);
         Scanner keyIn = new Scanner(System.in);
-        String paragraph = "This is a paragraph";
-        String [] before = paragraph.split(" ");
-        System.out.println(paragraph);
+        String p = paragraphs[randP];
+        String [] before = p.split(" ");
+        int startTime = (int) System.currentTimeMillis();
+        System.out.println(p);
         String input = keyIn.nextLine();
         String [] after = input.split(" ");
-        int acc = 0;
         int shorter = 0;
         if(after.length < before.length)
         {
@@ -103,8 +107,22 @@ public class TypeFasterer {
                 acc++;
             }
         }
-        System.out.println("Your accuracy is " + ((100*acc)/before.length) + "%");
-        
+        int endTime = (int) System.currentTimeMillis();
+        double minutes = (endTime - startTime) * 0.0000166667;
+        wpm = after.length/minutes;
+        System.out.println("\nYour accuracy is " + (100*acc)/before.length + "%");
+        System.out.println("Your WPM is " + (int)wpm + "\n");
+        System.out.println("Do you want to continue? Y or N");
+        input = keyIn.nextLine();
+        input = input.toUpperCase();
+        if(input.compareTo("N") == 0)
+        {
+            System.exit(0);
+        }
+        else{
+            System.out.print("\f");
+            menu();
+        }
     }
 
     private static void words() {
