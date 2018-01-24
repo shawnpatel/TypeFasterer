@@ -49,6 +49,29 @@ public class TypeFasterer {
     }
 
     private static void words() {
-        System.out.println("This is a word.");
+        int accuracy = 0;
+        double wpm = 0;
+        Scanner keyIn = new Scanner(System.in);
+        String [] words = {"This", "is", "a", "sentence."};
+        
+        int startTime = (int) System.currentTimeMillis();
+        for (int i = 0; i < words.length; i++) {
+            System.out.println(words[i]);
+            
+            String input = keyIn.nextLine();
+            if (words[i].compareTo(input) == 0) {
+                accuracy++;
+            }
+        }
+        int endTime = (int) System.currentTimeMillis();
+        double minutes = (endTime - startTime) * 0.0000166667;
+        wpm = words.length / minutes;
+        
+        accuracy /= words.length;
+        accuracy *= 100;
+        System.out.print("Your speed was: ");
+        System.out.printf("%.0f", wpm);
+        System.out.println(" WPM");
+        System.out.println("Your accuracy was: " + accuracy + "%");
     }
 }
