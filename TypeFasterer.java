@@ -112,17 +112,8 @@ public class TypeFasterer {
         wpm = after.length/minutes;
         System.out.println("\nYour accuracy is " + (100*acc)/before.length + "%");
         System.out.println("Your WPM is " + (int)wpm + "\n");
-        System.out.println("Do you want to continue? Y or N");
-        input = keyIn.nextLine();
-        input = input.toUpperCase();
-        if(input.compareTo("N") == 0)
-        {
-            System.exit(0);
-        }
-        else{
-            System.out.print("\f");
-            menu();
-        }
+        
+        rerun();
     }
 
     private static void words() {
@@ -152,5 +143,20 @@ public class TypeFasterer {
         System.out.printf("%.0f", wpm);
         System.out.println(" WPM");
         System.out.println("Your accuracy was: " + accuracy + "%");
+        
+        rerun();
+    }
+    
+    private static void rerun() {
+        Scanner keyIn = new Scanner(System.in);
+        
+        System.out.println("Do you want to continue? Y or N");
+        String input = keyIn.nextLine().toUpperCase();
+        if (input.compareTo("Y") == 0) {
+            System.out.print("\f");
+            menu();
+        } else {
+            System.exit(0);
+        }
     }
 }
