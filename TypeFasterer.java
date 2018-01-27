@@ -11,40 +11,48 @@ import java.util.ArrayList;
 
 public class TypeFasterer {
     private static ArrayList<String> words = new ArrayList<String>();
-    
+    private static ArrayList<String> ewords = new ArrayList<String>();
+
     public static void main(String [] args) {
         readDataFromFile();
         menu();
     }
-    
+
     private static void readDataFromFile() {
         // The name of the file to open.
         String fileName = "words.txt";
+        String fileName2 = "ewords.txt";
 
         // This will reference one line at a time
         String line = null;
+        String line2 = null;
 
         try {
             // FileReader reads text files in the default encoding.
             FileReader fileReader = new FileReader(fileName);
+            FileReader fileReader2 = new FileReader(fileName2);
 
             // Always wrap FileReader in BufferedReader.
             BufferedReader bufferedReader = new BufferedReader(fileReader);
+            BufferedReader bufferedReader2 = new BufferedReader(fileReader2);
 
             while ((line = bufferedReader.readLine()) != null) {
                 words.add(line.trim());
             }
 
+            while ((line2 = bufferedReader2.readLine()) != null) {
+                ewords.add(line2.trim());
+            }
+
             // Always close files.
-            bufferedReader.close();         
+            bufferedReader.close(); 
+            bufferedReader2.close();
         }
         catch (FileNotFoundException ex) {
             System.out.println("Unable to open file '" + fileName + "'");                
         }
         catch (IOException ex) {
             System.out.println("Error reading file '" + fileName + "'");                  
-            // Or we could just do this: 
-            // ex.printStackTrace();
         }
     }
 
@@ -112,7 +120,7 @@ public class TypeFasterer {
         wpm = after.length/minutes;
         System.out.println("\nYour accuracy is " + (100*acc)/before.length + "%");
         System.out.println("Your WPM is " + (int)wpm + "\n");
-        
+
         rerun();
     }
 
@@ -121,40 +129,46 @@ public class TypeFasterer {
         int accuracy = 0;
         double wpm = 0;
         Scanner keyIn = new Scanner(System.in);
-        String [] ogWords = new String[5];
-        String [] inpWords = new String[5];
+
         int startTime = (int) System.currentTimeMillis();
         for (int i = 0; i < numberOfWords; i++) {
-            int random = (int) (Math.random() * words.size());
-            String randomWord = words.get(random);
-            ogWords[i] = randomWord;
+            String randomWord;
+            
+            int randomArr = (int) (Math.random() * 2);
+            if (randomArr == 0) {
+                int random = (int) (Math.random() * words.size());
+                randomWord = words.get(random);
+            } else {
+                int random = (int) (Math.random() * ewords.size());
+                randomWord = ewords.get(random);
+            }
+
             System.out.println(randomWord);
             String input = keyIn.nextLine();
-            inpWords[i] = input;
-            if (ogWords[i].compareTo(inpWords[i]) == 0) {
+            if (randomWord.compareTo(input) == 0) {
                 accuracy++;
             }
         }
         int endTime = (int) System.currentTimeMillis();
         double minutes = (endTime - startTime) * 0.0000166667;
         wpm = numberOfWords / minutes;
-        
+
         accuracy *= 100;
         accuracy /= numberOfWords;
         System.out.print("Your speed was: ");
         System.out.printf("%.0f", wpm);
         System.out.println(" WPM");
         System.out.println("Your accuracy was: " + accuracy + "%");
-        
+
         rerun();
     }
-    
+
     private static void rerun() {
         Scanner keyIn = new Scanner(System.in);
-        
+
         System.out.println("Do you want to continue? Y or N");
-        String input = keyIn.nextLine().toUpperCase();
-        if (input.compareTo("Y") == 0) {
+        String input = keyIn.nextLine().toLowerCase();
+        if (input.compareTo("y") == 0 || input.compareTo("yes") == 0) {
             System.out.print("\f");
             menu();
         } else {
