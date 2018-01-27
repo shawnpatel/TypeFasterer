@@ -121,15 +121,17 @@ public class TypeFasterer {
         int accuracy = 0;
         double wpm = 0;
         Scanner keyIn = new Scanner(System.in);
-        
+        String [] ogWords = new String[5];
+        String [] inpWords = new String[5];
         int startTime = (int) System.currentTimeMillis();
         for (int i = 0; i < numberOfWords; i++) {
             int random = (int) (Math.random() * words.size());
             String randomWord = words.get(random);
+            ogWords[i] = randomWord;
             System.out.println(randomWord);
-            
             String input = keyIn.nextLine();
-            if (randomWord.compareTo(input) == 0) {
+            inpWords[i] = input;
+            if (ogWords[i].compareTo(inpWords[i]) == 0) {
                 accuracy++;
             }
         }
