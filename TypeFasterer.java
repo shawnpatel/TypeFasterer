@@ -88,8 +88,14 @@ public class TypeFasterer {
         }
     }
 
-    private static String [] paragraphs = {"If the Easter Bunny and the Tooth Fairy had babies would they take your teeth and leave chocolate for you? He told us a very exciting adventure story. I am happy to take your donation; any amount will be\ngreatly appreciated."};
     private static void paragraph() {
+        System.out.println("");
+        String [] paragraphs = new String[5];
+        paragraphs[0] = "If the Easter Bunny and the Tooth Fairy had babies would they take your teeth and leave chocolate for you? He told us a very exciting adventure story. I am happy to take your donation; any amount will be \ngreatly appreciated. Green eggs and Ham - read it";
+        paragraphs[1] = "I love eating toasted cheese and tuna sandwiches. Last Friday in three week’s time I saw a spotted striped blue worm shake hands with a legless lizard. I really want some dessert. \nYeah, I think it's a good environment for learning English.";
+        paragraphs[2] = "He ran out of money, so he had to stop playing poker. Cats are good pets, for they are clean and are not noisy. Sometimes it is better to just walk away from things and go back to them later when you’re \nin a better frame of mind. The waves look wet.";
+        paragraphs[3] = "A purple pig and a green donkey flew a kite in the middle of the night and ended up sunburnt. Where do random thoughts come from? I often see the time 11:11 or 12:34 on clocks. The sky is clear; \nthe stars are twinkling. She only paints with bold colors";
+        paragraphs[4] = "This is a good way to increase your typing speed and accuracy, and you'll become a legend with enough practice. If you want \nto learn how to play the violin, make sure you know how to play with your food first. Trust me; violins taste good :)";
         int acc = 0;
         double wpm = 0;
         int randP = (int)(Math.random()*paragraphs.length);
@@ -117,6 +123,10 @@ public class TypeFasterer {
         }
         int endTime = (int) System.currentTimeMillis();
         double minutes = (endTime - startTime) * 0.0000166667;
+        if(after.length == 0)
+        {
+            wpm = 0.0;
+        }
         wpm = after.length/minutes;
         System.out.println("\nYour accuracy is " + (100*acc)/before.length + "%");
         System.out.println("Your WPM is " + (int)wpm + "\n");
@@ -133,7 +143,7 @@ public class TypeFasterer {
         int startTime = (int) System.currentTimeMillis();
         for (int i = 0; i < numberOfWords; i++) {
             String randomWord;
-            
+
             int randomArr = (int) (Math.random() * 2);
             if (randomArr == 0) {
                 int random = (int) (Math.random() * words.size());
