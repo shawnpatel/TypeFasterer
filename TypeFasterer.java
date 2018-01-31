@@ -4,6 +4,10 @@
  *
  * @author Shawn Patel and Bryan Kim
  * @version 1.0
+ * 
+ * We, Shawn Patel and Bryan Kim, pledge that this program is our own
+ * independent work and conforms to Oxford Academy's
+ * Academic Honesty Guidelines.
  */
 import java.io.*;
 import java.util.Scanner;
